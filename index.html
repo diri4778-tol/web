@@ -1,762 +1,1346 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>TKJ — Teknik Komputer & Jaringan</title>
-  <meta name="description" content="TKJ - Teknik Komputer & Jaringan. Kompetensi, project, galeri, dan kontak.">
-
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-
-  <style>
-  /* -------------------------
-     Reset & base
-     ------------------------- */
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#210509">
+<title>Untuk Meutia — Selamat Ulang Tahun</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,500;1,700;1,900&family=Cormorant+Garamond:wght@400;500;600&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
   :root{
-    --bg:#0b0f16;
-    --card:#0f1720;
-    --muted:#9aa4b2;
-    --accent:#00c8ff;
-    --accent-2:#6ee7b7;
-    --glass: rgba(255,255,255,0.04);
-    --radius:14px;
-    --container:1100px;
-    --ease: cubic-bezier(.2,.9,.3,1);
-    --text:#e6eef6;
+    --deep:#210509;
+    --maroon:#3d0e17;
+    --maroon-light:#5c1c26;
+    --wine:#7a2732;
+    --blush:#e7b8b4;
+    --gold:#cda869;
+    --cream:#f4e8d8;
+    --cream-dim:#d8c9b3;
   }
-  html{scroll-behavior:smooth}
-  *{box-sizing:border-box}
+  *{box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent;}
+  html{ scroll-behavior:smooth; background:var(--deep); }
   body{
-    margin:0;
-    font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
-    background:linear-gradient(180deg,var(--bg) 0%, #061017 100%);
-    color:var(--text);
-    -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
-    line-height:1.5;
+    background:
+      radial-gradient(ellipse at 20% 0%, #4a1420 0%, transparent 55%),
+      radial-gradient(ellipse at 85% 15%, #4a1420 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 100%, #340a12 0%, transparent 60%),
+      var(--deep);
+    color:var(--cream);
+    font-family:'Cormorant Garamond', serif;
+    overflow-x:hidden;
+    position:relative;
+    overscroll-behavior-y:none;
+    -webkit-font-smoothing:antialiased;
   }
-  .container{width:92%; max-width:var(--container); margin:0 auto;}
-
-  /* -------------------------
-     Header / Navbar
-     ------------------------- */
-  header.site-header{
-    position:fixed; inset:0 0 auto 0; height:72px; display:flex; align-items:center;
-    background: linear-gradient(180deg, rgba(5,10,15,0.7), rgba(5,10,15,0.35));
-    border-bottom:1px solid rgba(255,255,255,0.03);
-    backdrop-filter: blur(6px); z-index:120;
+  button{ touch-action:manipulation; }
+  /* film grain overlay */
+  body::after{
+    content:"";
+    position:fixed; inset:0;
+    pointer-events:none;
+    opacity:.05;
+    z-index:999;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
-  .nav-inner{width:100%; display:flex; justify-content:space-between; align-items:center; padding:0 2%;}
-  .brand{font-weight:700; color:var(--accent); letter-spacing:1px; font-size:20px}
-  nav ul{display:flex; gap:20px; list-style:none; align-items:center; margin:0; padding:0}
-  nav a{color:var(--muted); text-decoration:none; font-weight:600; padding:8px 10px; border-radius:8px; transition:all .18s var(--ease)}
-  nav a:hover{color:var(--text); background:rgba(255,255,255,0.02)}
-  nav a.active{color:var(--accent); background: linear-gradient(90deg, rgba(0,200,255,0.06), rgba(110,231,183,0.03)); box-shadow:0 6px 18px rgba(0,200,255,0.04)}
+  .container{ max-width:1000px; margin:0 auto; padding:0 22px; position:relative; z-index:2; }
 
-  .controls{display:flex; gap:12px; align-items:center}
-  .btn-ghost{background:transparent; border:1px solid rgba(255,255,255,0.04); color:var(--muted); padding:8px 12px; border-radius:10px; cursor:pointer}
-  .mode-toggle{cursor:pointer; padding:8px; border-radius:8px; background:transparent; border:1px solid rgba(255,255,255,0.03); color:var(--muted)}
+  h1,h2{ font-family:'Playfair Display', serif; font-weight:700; }
 
-  /* Hamburger mobile */
-  .hamburger{display:none; width:40px; height:40px; border-radius:8px; align-items:center; justify-content:center; cursor:pointer}
-  .hamburger span{display:block; width:20px; height:2px; background:var(--text); position:relative}
-  .hamburger span::before,.hamburger span::after{content:""; position:absolute; left:0; width:20px; height:2px; background:var(--text)}
-  .hamburger span::before{top:-7px} .hamburger span::after{top:7px}
+  /* ---------- floating hearts / sparkles ---------- */
+  .float-decor{ position:fixed; inset:0; pointer-events:none; z-index:1; overflow:hidden; }
+  .heart-p{
+    position:absolute;
+    bottom:-40px;
+    color:var(--wine);
+    opacity:.35;
+    animation:floatUp linear infinite;
+    font-size:18px;
+  }
+  @keyframes floatUp{
+    0%{ transform:translateY(0) translateX(0) rotate(0deg); opacity:0; }
+    10%{ opacity:.35; }
+    90%{ opacity:.25; }
+    100%{ transform:translateY(-115vh) translateX(20px) rotate(25deg); opacity:0; }
+  }
+  .sparkle{
+    position:absolute;
+    color:var(--gold);
+    animation:twinkle 3.2s ease-in-out infinite;
+  }
+  @keyframes twinkle{
+    0%,100%{ opacity:.15; transform:scale(.8); }
+    50%{ opacity:.9; transform:scale(1.15); }
+  }
 
-  /* -------------------------
-     Hero
-     ------------------------- */
+  /* ---------- section: hero ---------- */
   .hero{
-    min-height:88vh;
-    display:grid;
-    grid-template-columns:1fr 460px;
-    gap:36px;
+    min-height:100vh;
+    min-height:100svh;
+    display:flex;
+    flex-direction:column;
     align-items:center;
-    padding:120px 0 40px;
+    justify-content:center;
+    text-align:center;
+    padding:60px 20px;
+    position:relative;
   }
-  .hero-left h1{font-size:44px; line-height:1.02; margin:0 0 12px}
-  .hero-left p{color:var(--muted); margin-bottom:18px}
-  .hero-cta{display:flex; gap:12px; margin-top:18px}
-  .btn{display:inline-block; padding:12px 20px; border-radius:12px; font-weight:700; cursor:pointer}
-  .btn-primary{background:linear-gradient(90deg,var(--accent),var(--accent-2)); color:#00121a; box-shadow:0 10px 30px rgba(0,200,255,0.06)}
-  .btn-outline{background:transparent; border:1px solid rgba(255,255,255,0.04); color:var(--muted)}
-
-  .hero-right{display:flex; align-items:center; justify-content:center}
-  .profile-card{
-    width:420px; border-radius:18px; overflow:hidden; background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); padding:18px; border:1px solid rgba(255,255,255,0.03);
-    box-shadow:0 20px 60px rgba(2,8,20,0.6);
+  .hero-eyebrow{
+    font-family:'Caveat', cursive;
+    font-size:22px;
+    color:var(--blush);
+    letter-spacing:1px;
+    margin-bottom:6px;
   }
-  .profile-card img{width:100%; border-radius:12px; display:block}
-
-  /* Stats */
-  .stats{display:flex; gap:12px; margin-top:20px}
-  .stat{background:var(--glass); padding:10px 14px; border-radius:12px; text-align:center; min-width:90px}
-  .stat strong{display:block; color:var(--accent); font-size:18px}
-
-  /* -------------------------
-     Sections common
-     ------------------------- */
-  section.panel{padding:80px 0}
-  section h2{font-size:28px; margin:0 0 12px; color:var(--accent)}
-  .lead{color:var(--muted); margin-bottom:18px}
-
-  /* -------------------------
-     Services / Skills
-     ------------------------- */
-  .skills-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:18px; margin-top:20px}
-  .skill-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); padding:18px; border-radius:12px; border:1px solid rgba(255,255,255,0.03); transition:transform .25s var(--ease)}
-  .skill-card:hover{transform:translateY(-8px); box-shadow:0 20px 40px rgba(0,0,0,0.5)}
-  .skill-card h4{margin-bottom:8px}
-  .skill-list{display:flex; flex-direction:column; gap:6px; color:var(--muted); font-size:14px}
-
-  /* -------------------------
-     Certificates slider
-     ------------------------- */
-  .certificates{display:flex; gap:12px; align-items:center; margin-top:18px; overflow:hidden}
-  .cert-track{display:flex; gap:12px; animation:scrollLeft 18s linear infinite}
-  .cert{min-width:200px; background:rgba(255,255,255,0.03); padding:12px; border-radius:12px; border:1px solid rgba(255,255,255,0.03); text-align:center}
-  .cert img{width:100%; height:100px; object-fit:cover; border-radius:8px; display:block}
-  @keyframes scrollLeft{
-    0%{transform:translateX(0)}
-    100%{transform:translateX(-50%)}
+  .hero h1{
+    font-size:clamp(42px, 9vw, 88px);
+    font-style:italic;
+    line-height:1.05;
+    background:linear-gradient(180deg, var(--cream) 20%, var(--gold) 100%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    text-shadow:0 2px 24px rgba(205,168,105,0.15);
   }
-
-  /* -------------------------
-     Projects gallery
-     ------------------------- */
-  .projects-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:20px}
-  .project{position:relative; overflow:hidden; border-radius:12px; cursor:pointer; border:1px solid rgba(255,255,255,0.03)}
-  .project img{width:100%; height:180px; object-fit:cover; display:block; transition:transform .45s var(--ease)}
-  .project:hover img{transform:scale(1.06)}
-  .project .label{position:absolute; left:8px; bottom:8px; background:linear-gradient(90deg, rgba(0,0,0,0.5), rgba(0,0,0,0.2)); padding:6px 10px; border-radius:8px; color:#fff; font-weight:700}
-
-  /* Lightbox */
-  .lightbox{position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(0,0,0,0.7); z-index:800}
-  .lightbox.active{display:flex}
-  .lightbox img{max-width:90%; max-height:80vh; border-radius:8px; box-shadow:0 30px 80px rgba(0,0,0,0.7)}
-
-  /* -------------------------
-     Network Topology (SVG animation)
-     ------------------------- */
-  .topology{display:flex; gap:20px; align-items:center; justify-content:center; margin-top:20px}
-  .node{width:90px; height:90px; border-radius:12px; background:linear-gradient(180deg,#071722,#072a36); border:1px solid rgba(0,200,255,0.06); display:flex; align-items:center; justify-content:center; color:var(--accent); font-weight:700; position:relative; box-shadow:0 10px 30px rgba(0,200,255,0.03)}
-  .link{height:4px; width:120px; background:linear-gradient(90deg, rgba(0,200,255,0.15), rgba(110,231,183,0.12)); border-radius:6px; position:relative; overflow:hidden}
-  .link::after{content:""; position:absolute; left:-40%; top:0; width:40%; height:100%; background:linear-gradient(90deg, rgba(0,255,255,0.6), rgba(255,255,255,0.0)); animation:flow 2s linear infinite}
-  @keyframes flow{0%{left:-40%}100%{left:120%}}
-
-  /* -------------------------
-     Curriculum / Accordion FAQ
-     ------------------------- */
-  .curriculum{display:grid; grid-template-columns:1fr 380px; gap:20px; align-items:start; margin-top:20px}
-  .curr-list{background:var(--card); padding:16px; border-radius:12px; border:1px solid rgba(255,255,255,0.03)}
-  .curr-list li{padding:10px 12px; border-radius:8px; margin-bottom:8px; background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent)}
-  .accordion{background:var(--card); padding:12px; border-radius:12px; overflow:hidden}
-  .acc-item{border-bottom:1px solid rgba(255,255,255,0.03)}
-  .acc-head{padding:12px; cursor:pointer; display:flex; justify-content:space-between; align-items:center}
-  .acc-body{padding:0 12px 12px 12px; display:none; color:var(--muted)}
-
-  /* -------------------------
-     Blog mini / testimonials
-     ------------------------- */
-  .blog-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:18px}
-  .post{background:var(--card); padding:14px; border-radius:12px; border:1px solid rgba(255,255,255,0.03)}
-  .testimonials{display:flex; gap:12px; margin-top:14px}
-  .testimonial{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); padding:12px; border-radius:12px; min-width:220px; border:1px solid rgba(255,255,255,0.03)}
-
-  /* -------------------------
-     Gallery grid
-     ------------------------- */
-  .photo-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-top:12px}
-  .photo-grid img{width:100%; height:150px; object-fit:cover; border-radius:8px}
-
-  /* -------------------------
-     Footer
-     ------------------------- */
-  footer.site-footer{padding:30px 0; margin-top:40px; border-top:1px solid rgba(255,255,255,0.03); color:var(--muted)}
-  .footer-grid{display:flex; justify-content:space-between; gap:12px; align-items:center}
-  .socials a{margin-left:8px; color:var(--muted); text-decoration:none; font-weight:700}
-
-  /* -------------------------
-     Contact modal (pop-up)
-     ------------------------- */
-  .modal{display:none; position:fixed; inset:0; align-items:center; justify-content:center; z-index:900; background:rgba(0,0,0,0.6); backdrop-filter:blur(4px)}
-  .modal.open{display:flex}
-  .modal-card{width:360px; background:#07121a; padding:18px; border-radius:12px; border:1px solid rgba(255,255,255,0.04)}
-  .modal-card h3{margin:0 0 8px}
-  .modal-card label{display:block; margin-top:8px; font-size:13px; color:var(--muted)}
-  .modal-card input,.modal-card textarea{width:100%; padding:10px; margin-top:6px; border-radius:8px; background:#071522; border:1px solid rgba(255,255,255,0.03); color:var(--text)}
-
-  /* -------------------------
-     Responsive
-     ------------------------- */
-  @media (max-width:1000px){
-    .hero{grid-template-columns:1fr; padding:100px 0 40px}
-    .projects-grid{grid-template-columns:repeat(2,1fr)}
-    .photo-grid{grid-template-columns:repeat(2,1fr)}
-    .blog-grid{grid-template-columns:1fr}
-    .cert-track{animation:none}
-    .certificates{overflow:auto; padding-bottom:6px}
+  .hero .sub{
+    margin-top:18px;
+    font-size:20px;
+    color:var(--cream-dim);
+    font-style:italic;
   }
-  @media (max-width:720px){
-    nav ul{display:none}
-    .hamburger{display:flex}
-    .hero-right{display:none}
-    .projects-grid{grid-template-columns:1fr}
-    .curriculum{grid-template-columns:1fr}
-    .container{width:95%}
+  .hero-divider{
+    width:70px; height:1px;
+    background:linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin:26px auto;
+  }
+  .scroll-hint{
+    margin-top:60px;
+    font-family:'Caveat', cursive;
+    font-size:18px;
+    color:var(--cream-dim);
+    display:flex; flex-direction:column; align-items:center; gap:6px;
+    animation:bob 2s ease-in-out infinite;
+  }
+  @keyframes bob{ 0%,100%{ transform:translateY(0);} 50%{ transform:translateY(8px);} }
+
+  /* ---------- section: envelope ---------- */
+  .envelope-section{
+    min-height:100vh;
+    min-height:100svh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    padding:40px 20px;
+  }
+  .env-label{
+    font-family:'Caveat', cursive;
+    font-size:24px;
+    color:var(--cream-dim);
+    margin-bottom:30px;
+  }
+  .envelope{
+    width:min(360px, 84vw);
+    aspect-ratio:3/2;
+    position:relative;
+    cursor:pointer;
+    filter:drop-shadow(0 20px 40px rgba(0,0,0,.5));
+  }
+  .env-body{
+    position:absolute; inset:0;
+    background:linear-gradient(160deg, #5c1a24, #430f18);
+    border:1px solid rgba(205,168,105,.35);
+    border-radius:4px;
+  }
+  .env-flap{
+    position:absolute;
+    top:0; left:0; right:0;
+    height:58%;
+    background:linear-gradient(160deg, #6e2530, #4a121c);
+    clip-path:polygon(0 0, 100% 0, 50% 100%);
+    transform-origin:top;
+    transition:transform .7s cubic-bezier(.6,-0.2,.3,1.3);
+    border-bottom:1px solid rgba(205,168,105,.25);
+  }
+  .envelope.open .env-flap{ transform:rotateX(180deg); }
+  .seal{
+    position:absolute;
+    left:50%; top:50%;
+    transform:translate(-50%,-50%);
+    width:64px; height:64px;
+    border-radius:50%;
+    background:radial-gradient(circle at 35% 30%, #a4283a, #6d1421);
+    display:flex; align-items:center; justify-content:center;
+    font-size:24px;
+    color:var(--cream);
+    box-shadow:0 6px 14px rgba(0,0,0,.4);
+    transition:transform .5s ease, opacity .5s ease;
+    z-index:3;
+  }
+  .envelope.open .seal{ transform:translate(-50%,-50%) scale(0); opacity:0; }
+  .env-hint{
+    position:absolute;
+    bottom:-38px; left:0; right:0;
+    text-align:center;
+    font-family:'Caveat', cursive;
+    font-size:17px;
+    color:var(--cream-dim);
+    opacity:.8;
   }
 
-  /* simple reveal helper (JS will toggle .show) */
-  .reveal{opacity:0; transform:translateY(20px); transition:opacity .6s var(--ease), transform .6s var(--ease)}
-  .reveal.show{opacity:1; transform:translateY(0)}
-  </style>
+  /* ---------- letter ---------- */
+  .letter-wrap{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height 1s ease;
+    width:100%;
+    display:flex;
+    justify-content:center;
+  }
+  .letter-wrap.show{ max-height:1400px; margin-top:50px; }
+  .letter{
+    width:min(560px, 92vw);
+    background:linear-gradient(180deg, #f7ecd8, #eddcbc);
+    color:#3d1015;
+    border-radius:3px;
+    padding:44px 38px 38px;
+    position:relative;
+    box-shadow:0 25px 60px rgba(0,0,0,.55);
+    opacity:0;
+    transform:translateY(30px);
+    transition:opacity .9s ease .3s, transform .9s ease .3s;
+  }
+  .letter-wrap.show .letter{ opacity:1; transform:translateY(0); }
+  .letter::before{
+    content:"♥";
+    position:absolute; top:-18px; left:50%; transform:translateX(-50%);
+    width:36px; height:36px;
+    background:radial-gradient(circle at 35% 30%, #a4283a, #6d1421);
+    border-radius:50%;
+    color:#f4e8d8;
+    display:flex; align-items:center; justify-content:center;
+    font-size:15px;
+    box-shadow:0 4px 10px rgba(0,0,0,.35);
+  }
+  .letter-title{
+    font-family:'Playfair Display', serif;
+    font-style:italic;
+    font-weight:700;
+    font-size:26px;
+    text-align:center;
+    color:#6d1421;
+    margin-bottom:20px;
+  }
+  .letter-body{
+    font-family:'Caveat', cursive;
+    font-size:24px;
+    line-height:1.55;
+    color:#3d1015;
+  }
+  .letter-sign{
+    text-align:right;
+    font-family:'Playfair Display', serif;
+    font-style:italic;
+    margin-top:18px;
+    color:#6d1421;
+    font-size:20px;
+  }
+
+  /* ---------- section titles ---------- */
+  .section{ padding:90px 0 20px; }
+  .section-head{ text-align:center; margin-bottom:50px; }
+  .section-head .eyebrow{
+    font-family:'Caveat', cursive;
+    color:var(--blush);
+    font-size:20px;
+    display:block;
+    margin-bottom:4px;
+  }
+  .section-head h2{
+    font-size:clamp(28px,5vw,42px);
+    font-style:italic;
+    color:var(--cream);
+  }
+
+  /* ---------- photo gallery ---------- */
+  .gallery{
+    columns:3 260px;
+    column-gap:26px;
+    padding-bottom:30px;
+  }
+  @media (max-width:640px){ .gallery{ columns:1 260px; } }
+  .polaroid{
+    break-inside:avoid;
+    background:#f4ecdd;
+    padding:14px 14px 20px;
+    margin:0 0 26px;
+    border-radius:2px;
+    box-shadow:0 14px 30px rgba(0,0,0,.4);
+    position:relative;
+    opacity:0;
+    transform:translateY(24px);
+    transition:opacity .7s ease, transform .7s ease;
+  }
+  .polaroid.in-view{ opacity:1; transform:translateY(0); }
+  .polaroid:nth-child(odd){ transform:translateY(24px) rotate(-2.4deg); }
+  .polaroid:nth-child(odd).in-view{ transform:rotate(-2.4deg); }
+  .polaroid:nth-child(3n){ transform:translateY(24px) rotate(2.2deg); }
+  .polaroid:nth-child(3n).in-view{ transform:rotate(2.2deg); }
+  .polaroid:hover{ transform:rotate(0deg) scale(1.03) !important; z-index:5; }
+  .tape{
+    position:absolute; top:-10px; left:50%; transform:translateX(-50%) rotate(-3deg);
+    width:70px; height:22px;
+    background:rgba(231,184,180,.55);
+    border:1px solid rgba(255,255,255,.3);
+  }
+  .polaroid:nth-child(4n) .tape{ background:rgba(205,168,105,.4); transform:translateX(-50%) rotate(4deg); }
+  .photo-frame{
+    width:100%;
+    aspect-ratio:1/1;
+    background:linear-gradient(150deg, #6e2530, #3d0e17);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+  }
+  .photo-frame img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .photo-placeholder{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:6px;
+    color:rgba(244,232,216,.45);
+    font-family:'Cormorant Garamond', serif;
+    font-size:13px;
+    text-align:center;
+  }
+  .photo-placeholder .icon{ font-size:26px; }
+  .polaroid-cap{
+    font-family:'Caveat', cursive;
+    font-size:19px;
+    text-align:center;
+    color:#4a1420;
+    margin-top:10px;
+  }
+
+  /* ---------- calendar + gift row ---------- */
+  .row-cards{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:26px;
+    margin-top:10px;
+  }
+  @media (max-width:700px){ .row-cards{ grid-template-columns:1fr; } }
+  .card{
+    background:linear-gradient(165deg, var(--maroon-light), var(--maroon));
+    border:1px solid rgba(205,168,105,.25);
+    border-radius:8px;
+    padding:26px;
+  }
+  .card-title{
+    font-family:'Playfair Display', serif;
+    font-style:italic;
+    font-size:20px;
+    color:var(--gold);
+    margin-bottom:16px;
+  }
+
+  /* calendar */
+  .cal-grid{
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    gap:6px;
+    text-align:center;
+  }
+  .cal-grid span{ font-size:14px; color:var(--cream-dim); padding:6px 0; }
+  .cal-grid .dow{ color:var(--blush); font-size:12px; letter-spacing:1px; }
+  .cal-grid .today{
+    background:radial-gradient(circle, #a4283a, #6d1421);
+    color:var(--cream);
+    border-radius:50%;
+    font-weight:600;
+    position:relative;
+  }
+  .cal-note{
+    margin-top:14px;
+    font-family:'Caveat', cursive;
+    font-size:18px;
+    color:var(--cream-dim);
+  }
+
+  /* gift & flower */
+  .deco-row{ display:flex; align-items:center; gap:20px; }
+  .gift-box{
+    width:76px; height:64px;
+    background:linear-gradient(155deg,#a4283a,#6d1421);
+    position:relative;
+    border-radius:3px;
+    flex-shrink:0;
+  }
+  .gift-box::before{
+    content:""; position:absolute; left:50%; top:0; bottom:0; width:12px; transform:translateX(-50%);
+    background:var(--gold);
+  }
+  .gift-box::after{
+    content:""; position:absolute; top:50%; left:0; right:0; height:12px; transform:translateY(-50%);
+    background:var(--gold);
+  }
+  .gift-lid{
+    position:absolute; top:-14px; left:-6px; right:-6px; height:16px;
+    background:linear-gradient(155deg,#c22c42,#7a2732);
+    border-radius:3px;
+  }
+  .deco-text{ font-family:'Caveat', cursive; font-size:19px; color:var(--cream-dim); line-height:1.5; }
+
+  .flower-wrap{ font-size:44px; line-height:1; flex-shrink:0; }
+
+  /* ---------- closing ---------- */
+  .closing{
+    min-height:90vh;
+    min-height:90svh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:80px 20px 120px;
+  }
+  .closing h2{
+    font-size:clamp(34px,7vw,64px);
+    font-style:italic;
+    background:linear-gradient(180deg, var(--cream), var(--gold));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+    line-height:1.15;
+  }
+  .closing .name{ display:block; }
+  .closing .tagline{
+    margin-top:22px;
+    font-family:'Caveat', cursive;
+    font-size:26px;
+    color:var(--blush);
+  }
+  .closing .heart-row{ margin-top:30px; font-size:22px; color:var(--wine); letter-spacing:10px; }
+
+  footer{
+    text-align:center;
+    padding:26px;
+    font-size:13px;
+    color:rgba(244,232,216,.3);
+    font-family:'Cormorant Garamond', serif;
+  }
+
+  /* =========================================================================
+     ============  TAMBAHAN BARU (tidak mengubah CSS di atas)  ==============
+  ========================================================================= */
+
+  /* ---------- 1. Kelopak sakura & mawar jatuh ---------- */
+  .petal-decor{ position:fixed; inset:0; pointer-events:none; z-index:2; overflow:hidden; }
+  .petal{
+    position:absolute; top:-8vh;
+    font-size:16px;
+    opacity:.85;
+    animation:petalFall linear infinite;
+    will-change:transform;
+  }
+  @keyframes petalFall{
+    0%{ transform:translate(0,0) rotate(0deg); opacity:0; }
+    8%{ opacity:.9; }
+    92%{ opacity:.7; }
+    100%{ transform:translate(var(--drift,40px), 112vh) rotate(360deg); opacity:0; }
+  }
+
+  /* ---------- 2. Background bintang bergerak ---------- */
+  #starField{
+    position:fixed; inset:0; z-index:0; pointer-events:none;
+    opacity:.9;
+  }
+
+  /* ---------- 3. Kontrol musik elegan ---------- */
+  .music-elegant{
+    position:fixed;
+    top:calc(15px + env(safe-area-inset-top, 0px));
+    right:calc(15px + env(safe-area-inset-right, 0px));
+    z-index:1001;
+    display:flex; align-items:center; gap:10px;
+    background:linear-gradient(160deg, rgba(92,26,36,.85), rgba(61,14,23,.9));
+    border:1px solid rgba(205,168,105,.4);
+    border-radius:40px;
+    padding:8px 16px 8px 8px;
+    backdrop-filter:blur(6px);
+    box-shadow:0 10px 26px rgba(0,0,0,.4);
+    transform:translateX(120%);
+    transition:transform .8s ease 1.6s;
+  }
+  .music-elegant.show{ transform:translateX(0); }
+  .music-elegant .disc{
+    width:34px; height:34px; border-radius:50%;
+    background:radial-gradient(circle at 40% 35%, #cda869, #6d1421 70%);
+    display:flex; align-items:center; justify-content:center;
+    font-size:14px;
+    animation:discSpin 3.2s linear infinite;
+    animation-play-state:paused;
+    flex-shrink:0;
+    border:2px solid rgba(244,232,216,.5);
+  }
+  .music-elegant.playing .disc{ animation-play-state:running; }
+  @keyframes discSpin{ to{ transform:rotate(360deg); } }
+  .music-elegant .m-info{ display:flex; flex-direction:column; line-height:1.15; }
+  .music-elegant .m-title{ font-family:'Caveat',cursive; font-size:15px; color:var(--cream); }
+  .music-elegant .m-sub{ font-size:10px; letter-spacing:.5px; color:var(--cream-dim); text-transform:uppercase; }
+  .music-elegant .m-vol{
+    -webkit-appearance:none; appearance:none;
+    width:56px; height:3px; border-radius:3px;
+    background:rgba(244,232,216,.3); outline:none;
+    accent-color:var(--gold);
+  }
+  @media (max-width:520px){ .music-elegant .m-vol{ display:none; } .music-elegant .m-info{ display:none; } }
+
+  /* ---------- 4. Efek mengetik (surat & epilog) ---------- */
+  .typing-cursor{ display:inline-block; width:2px; background:currentColor; margin-left:2px; animation:blinkCursor .8s steps(1) infinite; }
+  @keyframes blinkCursor{ 50%{ opacity:0; } }
+
+  /* ---------- 5. Galeri fullscreen next/prev ---------- */
+  #lightbox .lb-nav{
+    position:absolute; top:50%; transform:translateY(-50%);
+    width:46px; height:46px; border-radius:50%;
+    background:rgba(244,232,216,.12);
+    border:1px solid rgba(244,232,216,.35);
+    color:#f4e8d8; font-size:20px;
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer; user-select:none;
+    transition:background .25s ease, transform .25s ease;
+  }
+  #lightbox .lb-nav:hover{ background:rgba(244,232,216,.28); transform:translateY(-50%) scale(1.08); }
+  #lightbox .lb-prev{ left:18px; }
+  #lightbox .lb-next{ right:18px; }
+  #lightbox .lb-close{
+    position:absolute;
+    top:calc(18px + env(safe-area-inset-top, 0px));
+    right:calc(18px + env(safe-area-inset-right, 0px));
+    width:38px; height:38px; border-radius:50%;
+    background:rgba(244,232,216,.12); border:1px solid rgba(244,232,216,.35);
+    color:#f4e8d8; font-size:18px; display:flex; align-items:center; justify-content:center; cursor:pointer;
+  }
+  #lightbox .lb-counter{
+    position:absolute; bottom:22px; left:50%; transform:translateX(-50%);
+    font-family:'Caveat',cursive; font-size:18px; color:var(--cream-dim);
+    background:rgba(0,0,0,.35); padding:4px 16px; border-radius:20px;
+  }
+  #lightbox .lb-cap{
+    position:absolute; bottom:60px; left:50%; transform:translateX(-50%);
+    font-family:'Caveat',cursive; font-size:20px; color:var(--cream);
+    max-width:80vw; text-align:center;
+  }
+
+  /* ---------- 6. Confetti premium (bentuk pita) ---------- */
+  .confetti-ribbon{ position:fixed; top:-30px; z-index:3000; pointer-events:none; border-radius:2px; }
+
+  /* ---------- 7. Kotak hadiah interaktif ---------- */
+  .gift-box{ cursor:pointer; transition:transform .35s ease; }
+  .gift-box:hover{ transform:translateY(-4px) scale(1.05); }
+  .gift-box.opened .gift-lid{
+    transform:translateY(-30px) rotate(-18deg);
+    transition:transform .5s cubic-bezier(.6,-0.3,.3,1.4);
+  }
+  .gift-box .gift-lid{ transition:transform .5s cubic-bezier(.6,-0.3,.3,1.4); }
+  .gift-note{
+    max-height:0; overflow:hidden; opacity:0;
+    font-family:'Caveat',cursive; font-size:18px; color:var(--cream-dim);
+    transition:max-height .6s ease, opacity .6s ease, margin .6s ease;
+  }
+  .gift-note.show{ max-height:200px; opacity:1; margin-top:12px; }
+
+  /* ---------- 8. Kue ulang tahun + tiup lilin ---------- */
+  .cake-section{ padding:90px 0 40px; text-align:center; }
+  .cake-wrap{ display:flex; flex-direction:column; align-items:center; gap:26px; }
+  .cake-svg-wrap{ position:relative; width:min(260px,60vw); }
+  .cake-body{ width:100%; display:block; }
+  .candle-flame{
+    position:absolute; width:10px; height:16px; border-radius:50% 50% 50% 50%/60% 60% 40% 40%;
+    background:radial-gradient(circle at 50% 70%, #ffe9a8, #ff9d3d 60%, #d4480f 100%);
+    transform-origin:bottom center;
+    animation:flameFlicker 1.1s ease-in-out infinite;
+    box-shadow:0 0 12px 3px rgba(255,170,60,.7);
+  }
+  @keyframes flameFlicker{ 0%,100%{ transform:scaleY(1) rotate(-2deg);} 50%{ transform:scaleY(1.15) rotate(2deg);} }
+  .candle-flame.blown{ animation:none; opacity:0; transition:opacity .4s ease; }
+  .blow-btn{
+    font-family:'Caveat',cursive; font-size:20px;
+    background:linear-gradient(160deg,#a4283a,#6d1421);
+    color:var(--cream); border:1px solid rgba(205,168,105,.4);
+    padding:12px 30px; border-radius:40px; cursor:pointer;
+    box-shadow:0 10px 24px rgba(0,0,0,.35);
+    transition:transform .25s ease;
+  }
+  .blow-btn:hover{ transform:translateY(-3px); }
+  .blow-btn:disabled{ opacity:.5; cursor:default; transform:none; }
+  .cake-wish{ font-family:'Caveat',cursive; font-size:20px; color:var(--cream-dim); min-height:28px; }
+
+  /* ---------- 9. Virtual hug ---------- */
+  .hug-section{ padding:60px 0; text-align:center; }
+  .hug-emoji{ font-size:64px; display:inline-block; transition:transform .5s ease; }
+  .hug-emoji.hugging{ animation:hugSqueeze .9s ease; }
+  @keyframes hugSqueeze{ 0%{transform:scale(1);} 30%{transform:scale(1.25) rotate(-4deg);} 60%{transform:scale(1.1) rotate(4deg);} 100%{transform:scale(1);} }
+  .hug-btn{
+    display:block; margin:18px auto 0;
+    font-family:'Caveat',cursive; font-size:19px;
+    background:transparent; color:var(--gold);
+    border:1px solid rgba(205,168,105,.5); border-radius:40px;
+    padding:10px 26px; cursor:pointer;
+    transition:background .25s ease, color .25s ease;
+  }
+  .hug-btn:hover{ background:rgba(205,168,105,.15); }
+  .hug-msg{ margin-top:14px; font-family:'Caveat',cursive; font-size:18px; color:var(--blush); min-height:24px; opacity:0; transition:opacity .5s ease; }
+  .hug-msg.show{ opacity:1; }
+
+  /* ---------- 10. Epilog "I Love You..." dengan efek mengetik ---------- */
+  .epilogue{ margin-top:46px; min-height:70px; }
+  .epilogue-text{
+    font-family:'Playfair Display', serif; font-style:italic;
+    font-size:clamp(20px,4vw,30px);
+    background:linear-gradient(180deg, var(--cream), var(--gold));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+
+  /* ---------- 12. Love meter ---------- */
+  .lovemeter-section{ padding:50px 0 30px; text-align:center; }
+  .lovemeter-title{ font-family:'Caveat',cursive; font-size:20px; color:var(--cream-dim); margin-bottom:16px; }
+  .lovemeter{
+    width:min(420px,86vw); height:22px; margin:0 auto;
+    background:rgba(244,232,216,.12); border:1px solid rgba(205,168,105,.35);
+    border-radius:20px; overflow:hidden; cursor:pointer; position:relative;
+  }
+  .lovemeter-fill{
+    height:100%; width:0%;
+    background:linear-gradient(90deg, var(--wine), var(--gold));
+    transition:width 1.4s cubic-bezier(.2,.8,.2,1);
+    position:relative;
+  }
+  .lovemeter-label{ margin-top:10px; font-family:'Caveat',cursive; font-size:19px; color:var(--blush); }
+  .lovemeter-hint{ margin-top:4px; font-size:12px; color:var(--cream-dim); opacity:.7; }
+
+  /* ---------- 13. Reveal animasi smooth untuk section baru ---------- */
+  .reveal-up{ opacity:0; transform:translateY(34px); transition:opacity .9s ease, transform .9s ease; }
+  .reveal-up.in-view{ opacity:1; transform:translateY(0); }
+
+  /* ---------- 15. Loading screen elegan ---------- */
+  #loadingScreen{
+    position:fixed; inset:0; z-index:5000;
+    background:var(--deep);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    gap:18px;
+    transition:opacity .8s ease, visibility .8s ease;
+  }
+  #loadingScreen.hide{ opacity:0; visibility:hidden; pointer-events:none; }
+  .loader-heart{
+    width:46px; height:46px;
+    background:radial-gradient(circle at 35% 30%, #a4283a, #6d1421);
+    clip-path:path('M23,42 C4,29 0,18 0,11 C0,4 5,0 11,0 C16,0 21,4 23,9 C25,4 30,0 35,0 C41,0 46,4 46,11 C46,18 42,29 23,42 Z');
+    animation:loaderPulse 1s ease-in-out infinite;
+  }
+  @keyframes loaderPulse{ 0%,100%{ transform:scale(.85); opacity:.7;} 50%{ transform:scale(1.05); opacity:1;} }
+  .loader-text{ font-family:'Caveat',cursive; font-size:20px; color:var(--cream-dim); letter-spacing:1px; }
+
+  /* ---------- Cursor mengeluarkan hati ---------- */
+  .cursor-heart{
+    position:fixed; z-index:4000; pointer-events:none;
+    font-size:14px; color:var(--wine);
+    animation:cursorHeartFade 1s ease forwards;
+  }
+  @keyframes cursorHeartFade{
+    0%{ transform:translate(-50%,-50%) scale(1); opacity:.9; }
+    100%{ transform:translate(-50%,-160%) scale(.4); opacity:0; }
+  }
+
+  /* ---------- 14. Mobile lebih rapi (override tambahan, tidak menghapus yang lama) ---------- */
+  @media (max-width:600px){
+    .music-elegant{
+      padding:6px 12px 6px 6px;
+      top:calc(10px + env(safe-area-inset-top, 0px));
+      right:calc(10px + env(safe-area-inset-right, 0px));
+    }
+    .cake-svg-wrap{ width:80vw; }
+    #lightbox .lb-nav{ width:38px; height:38px; font-size:16px; }
+    #lightbox .lb-prev{ left:8px; } #lightbox .lb-next{ right:8px; }
+    .lovemeter{ width:88vw; }
+    .hug-emoji{ font-size:52px; }
+    .hero{ padding:50px 16px; }
+    .hero h1{ font-size:clamp(36px, 11vw, 60px); }
+    .hero-eyebrow{ font-size:18px; }
+    .letter{ padding:34px 22px 28px; }
+    .letter-body{ font-size:20px; }
+    .section{ padding:64px 0 10px; }
+    .section-head{ margin-bottom:34px; }
+    .row-cards{ gap:18px; }
+    .card{ padding:20px; }
+    .polaroid{ margin-bottom:20px; }
+    .closing{ padding:60px 16px 90px; }
+    .epilogue-text{ font-size:clamp(18px,5vw,24px); }
+  }
+
+  /* layar sangat kecil (contoh: Android compact ~360px) */
+  @media (max-width:380px){
+    .hero h1{ font-size:34px; }
+    .letter-body{ font-size:18px; }
+    .envelope{ width:88vw; }
+  }
+</style>
 </head>
 <body>
 
-  <!-- HEADER -->
-  <header class="site-header">
-    <div class="nav-inner container">
-      <div class="brand">TKJ • TekKom & Jaringan</div>
+<!-- ===== TAMBAHAN: loading screen elegan ===== -->
+<div id="loadingScreen">
+  <div class="loader-heart"></div>
+  <p class="loader-text">memuat kenangan…</p>
+</div>
 
-      <nav>
-        <ul id="navList">
-          <li><a href="#home" class="nav-link active">Home</a></li>
-          <li><a href="#about" class="nav-link">Tentang</a></li>
-          <li><a href="#skills" class="nav-link">Skill</a></li>
-          <li><a href="#projects" class="nav-link">Project</a></li>
-          <li><a href="#topology" class="nav-link">Topologi</a></li>
-          <li><a href="#curriculum" class="nav-link">Materi</a></li>
-          <li><a href="#career" class="nav-link">Karier</a></li>
-          <li><a href="#gallery" class="nav-link">Galeri</a></li>
-          <li><a href="#faq" class="nav-link">FAQ</a></li>
-          <li><a href="#contact" class="nav-link">Kontak</a></li>
-        </ul>
-      </nav>
+<audio id="bgMusic" loop>
+<source src="musik.mp3" type="audio/mpeg">
+</audio>
 
-      <div class="controls">
-        <button class="mode-toggle" id="modeToggle" title="Toggle light/dark">🌗</button>
-        <button class="btn-ghost" id="openContactBtn">Kirim Pesan</button>
-        <div class="hamburger" id="hambtn" aria-hidden="true"><span></span></div>
-      </div>
-    </div>
-  </header>
-
-  <!-- MAIN CONTENT -->
-  <main class="container" id="home" style="padding-top:90px">
-
-    <!-- HERO -->
-    <section class="hero panel">
-      <div class="hero-left">
-        <h1 class="reveal">Teknik Komputer & Jaringan (TKJ)</h1>
-        <p class="lead reveal">Belajar merakit komputer, mengelola server, membangun jaringan lokal & internet, serta keamanan jaringan.</p>
-
-        <div class="hero-cta reveal">
-          <a class="btn btn-primary" href="#projects">Lihat Project</a>
-          <a class="btn btn-outline" href="#curriculum">Materi</a>
-        </div>
-
-        <div class="stats reveal" style="margin-top:20px">
-          <div class="stat">
-            <strong>11</strong><small style="color:var(--muted)">Projects</small>
-          </div>
-          <div class="stat">
-            <strong>3</strong><small style="color:var(--muted)">Years</small>
-          </div>
-          <div class="stat">
-            <strong>-</strong><small style="color:var(--muted)">Students</small>
-          </div>
-        </div>
-      </div>
-
-      <div class="hero-right reveal">
-        <div class="profile-card">
-          <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=5b18f1e2a3bb9f6f2e8b0f2c5d2f3a54" alt="Lab TKJ">
-        </div>
-      </div>
-    </section>
-
-    <!-- ABOUT -->
-    <section id="about" class="panel reveal">
-      <h2>Apa Itu TKJ?</h2>
-      <p class="lead">TKJ atau Teknik Komputer dan Jaringan adalah program yang mempersiapkan siswa dengan kemampuan teknis dalam hardware, jaringan, server, dan keamanan digital.</p>
-
-      <div class="skills-grid" style="margin-top:18px">
-        <div class="skill-card reveal">
-          <h4>Praktik Langsung</h4>
-          <div class="skill-list">
-            <div>• Merakit PC & Troubleshooting</div>
-            <div>• Instalasi OS & Driver</div>
-            <div>• Konfigurasi jaringan</div>
-          </div>
-        </div>
-
-        <div class="skill-card reveal">
-          <h4>Networking</h4>
-          <div class="skill-list">
-            <div>• Routing & Switching</div>
-            <div>• Mikrotik Hotspot</div>
-            <div>• VLAN & Firewall</div>
-          </div>
-        </div>
-
-        <div class="skill-card reveal">
-          <h4>Server & Services</h4>
-          <div class="skill-list">
-            <div>• Webserver (Apache/Nginx)</div>
-            <div>• DNS / DHCP / FTP</div>
-            <div>• Virtualisasi & Linux</div>
-          </div>
-        </div>
-
-        <div class="skill-card reveal">
-          <h4>Security & IoT</h4>
-          <div class="skill-list">
-            <div>• Network security basics</div>
-            <div>• CCTV & NVR setup</div>
-            <div>• IoT device basics</div>
-          </div>
-        </div>
-      </div>
-
-    </section>
-
-    <!-- SKILLS / Layanan -->
-    <section id="skills" class="panel reveal">
-      <h2>Layanan & Skill Praktis</h2>
-      <p class="lead">Layanan praktik yang sering dilakukan di TKJ dan kompetensi yang dipelajari.</p>
-
-      <div class="skills-grid">
-        <div class="skill-card reveal">
-          <h4>Instalasi & Troubleshoot</h4>
-          <p class="lead" style="color:var(--muted)">Merakit PC, instal OS, dan perbaikan hardware.</p>
-        </div>
-
-        <div class="skill-card reveal">
-          <h4>Konfigurasi Jaringan</h4>
-          <p class="lead" style="color:var(--muted)">Mikrotik, routing, VLAN, switch konfigurasi.</p>
-        </div>
-
-        <div class="skill-card reveal">
-          <h4>Administrasi Server</h4>
-          <p class="lead" style="color:var(--muted)">Linux server, web server, DNS, DHCP.</p>
-        </div>
-
-        <div class="skill-card reveal">
-          <h4>Keamanan Jaringan</h4>
-          <p class="lead" style="color:var(--muted)">Firewall, enkripsi dasar, penanganan serangan dasar.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- PROJECTS -->
-    <section id="projects" class="panel reveal">
-      <h2>Project TKJ</h2>
-      <p class="lead">Contoh beberapa project yang biasa dikerjakan siswa TKJ.</p>
-
-      <div class="projects-grid">
-        <div class="project" data-src="https://tikoci.github.io/vscode-tikbook/media/screenshots/multitab-annotated.png">
-          <img src="https://tikoci.github.io/vscode-tikbook/media/screenshots/multitab-annotated.png" alt="">
-          <div class="label">Mikrotik</div>
-        </div>
-
-        <div class="project" data-src="https://ubuntucommunity.s3.us-east-2.amazonaws.com/original/2X/1/17ee449b2bd7c530d2f996215407fca5b722dcb2.png">
-          <img src="https://ubuntucommunity.s3.us-east-2.amazonaws.com/original/2X/1/17ee449b2bd7c530d2f996215407fca5b722dcb2.png" alt="">
-          <div class="label">Server Ubuntu</div>
-        </div>
-
-        <div class="project" data-src="https://ppkpijakarta.com/wp-content/uploads/2024/11/Praktik-Skill-Jaringan-komputer-Mendesain-Jaringan-1-1200x673.png">
-          <img src="https://ppkpijakarta.com/wp-content/uploads/2024/11/Praktik-Skill-Jaringan-komputer-Mendesain-Jaringan-1-1200x673.png" alt="">
-          <div class="label">Topology Design</div>
-        </div>
-
-        <div class="project" data-src="https://tse2.mm.bing.net/th/id/OIP.tC5F-FArWNiEJuPf4qvLBAHaEK?pid=ImgDet&w=178&h=100&c=7&dpr=1,5&o=7&rm=3">
-          <img src="https://tse2.mm.bing.net/th/id/OIP.tC5F-FArWNiEJuPf4qvLBAHaEK?pid=ImgDet&w=178&h=100&c=7&dpr=1,5&o=7&rm=3" alt="">
-          <div class="label">CCTV & NVR</div>
-        </div>
-      </div>
-
-      <!-- Lightbox -->
-      <div id="lightbox" class="lightbox" aria-hidden="true" tabindex="-1">
-        <img id="lbImage" src="" alt="Preview project">
-      </div>
-    </section>
-
-    <!-- TOPOLOGY -->
-    <section id="topology" class="panel reveal">
-      <h2>Topologi Jaringan Interaktif</h2>
-      <p class="lead">Visualisasi sederhana topologi: PC → Switch → Router → Internet</p>
-
-      <div class="topology" role="img" aria-label="Topologi jaringan">
-        <div class="node">
-          PC
-        </div>
-        <div class="link" aria-hidden="true"></div>
-        <div class="node">
-          SWITCH
-        </div>
-        <div class="link" aria-hidden="true"></div>
-        <div class="node">
-          ROUTER
-        </div>
-      </div>
-
-      <p style="color:var(--muted); margin-top:12px">Lampu pada link bergerak menunjukkan lalu lintas data (simulasi).</p>
-    </section>
-
-    <!-- CURRICULUM -->
-    <section id="curriculum" class="panel reveal">
-      <h2>Materi yang Dipelajari</h2>
-      <p class="lead">Ringkasan modul pembelajaran yang akan dipelajari dalam program TKJ.</p>
-
-      <div class="curriculum">
-        <ul class="curr-list reveal">
-          <li>Dasar Komputer & Perakitan</li>
-          <li>Dasar Jaringan (IP, Subnetting)</li>
-          <li>Routing & Switching</li>
-          <li>Administrasi Server (Linux)</li>
-          <li>Virtualisasi & Cloud Basics</li>
-          <li>Keamanan Jaringan</li>
-          <li>IoT & Embedded Systems</li>
-        </ul>
-
-        <div class="accordion reveal" id="faqAccordion">
-          <div class="acc-item">
-            <div class="acc-head">Apa perbedaan TKJ dan RPL?<span>+</span></div>
-            <div class="acc-body">TKJ fokus ke hardware & jaringan, RPL fokus ke perangkat lunak & pengembangan aplikasi.</div>
-          </div>
-          <div class="acc-item">
-            <div class="acc-head">Apakah harus jago komputer dulu?<span>+</span></div>
-            <div class="acc-body">Tidak perlu. Materi diajarkan dari dasar, praktik lebih banyak membantu untuk belajar cepat.</div>
-          </div>
-          <div class="acc-item">
-            <div class="acc-head">Apakah lulus TKJ bisa kerja langsung?<span>+</span></div>
-            <div class="acc-body">Banyak lulusan dapat kerja sebagai teknisi, admin jaringan, IT support, atau lanjut kuliah.</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CAREER -->
-    <section id="career" class="panel reveal">
-      <h2>Karier Lulusan TKJ</h2>
-      <p class="lead">Contoh karier yang bisa dikejar setelah menguasai kompetensi TKJ.</p>
-
-      <div class="cards">
-        <div class="card reveal">
-          <h4>Network Engineer</h4>
-          <p class="lead" style="color:var(--muted)">Merancang & mengelola jaringan perusahaan.</p>
-        </div>
-        <div class="card reveal">
-          <h4>System Administrator</h4>
-          <p class="lead" style="color:var(--muted)">Mengelola server, backup & layanan IT.</p>
-        </div>
-        <div class="card reveal">
-          <h4>IT Support</h4>
-          <p class="lead" style="color:var(--muted)">Troubleshoot & support pengguna.</p>
-        </div>
-        <div class="card reveal">
-          <h4>Freelancer</h4>
-          <p class="lead" style="color:var(--muted)">Jasa instalasi, konfigurasi & pembuatan jaringan kecil.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- GALLERY -->
-    <section id="gallery" class="panel reveal">
-      <h2>Galeri</h2>
-      <p class="lead">Foto lab, peralatan, dan aktivitas siswa.</p>
-
-      <div class="photo-grid">
-        <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=7a8b9c0d1e2f3a4b5c6d" alt="">
-        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=2a3b4c5d6e7f8a9b0c1d" alt="">
-        <img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=c3b4a5d6e7f8091a2b3c4d5e6f7a8b9c" alt="">
-        <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=3b4c5d6e7f8a9b0c1d2e" alt="">
-      </div>
-    </section>
-
-    <!-- BLOG MINI -->
-    <section id="blog" class="panel reveal">
-      <h2>Artikel Singkat</h2>
-      <p class="lead">Baca beberapa artikel singkat yang relevan dengan TKJ.</p>
-
-      <div class="blog-grid">
-        <article class="post reveal">
-          <h4>Mikrotik: Dasar yang Perlu Kamu Tahu</h4>
-          <p class="lead" style="color:var(--muted)">Intro singkat tentang Mikrotik dan penggunaan hotspot.</p>
-        </article>
-        <article class="post reveal">
-          <h4>Mengenal Switch Managed vs Unmanaged</h4>
-          <p class="lead" style="color:var(--muted)">Perbandingan cepat dan kapan memilih tiap jenis switch.</p>
-        </article>
-        <article class="post reveal">
-          <h4>Kenapa Belajar Linux itu Penting?</h4>
-          <p class="lead" style="color:var(--muted)">Manfaat dasar Linux untuk administrasi server.</p>
-        </article>
-      </div>
-    </section>
-
-    <!-- TESTIMONIALS -->
-    <section id="testi" class="panel reveal">
-      <h2>Testimoni Alumni</h2>
-      <div class="testimonials">
-        <div class="testimonial reveal">
-          <strong>Asep</strong>
-          <p class="lead" style="color:var(--muted)">"Belajar di TKJ membuat saya cepat kerja sebagai teknisi di kantor."</p>
-        </div>
-        <div class="testimonial reveal">
-          <strong>Dewi</strong>
-          <p class="lead" style="color:var(--muted)">"Project mikrotik yang saya kerjakan sekarang dipakai di sekolah."</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- FAQ (also included in accordion earlier) -->
-    <section id="faq" class="panel reveal">
-      <h2>FAQ</h2>
-      <div class="accordion" id="faq2">
-        <div class="acc-item">
-          <div class="acc-head">Apakah TKJ cocok untuk pemula?<span>+</span></div>
-          <div class="acc-body">Sangat cocok — materinya mulai dari dasar hingga advance.</div>
-        </div>
-        <div class="acc-item">
-          <div class="acc-head">Berapa lama untuk menguasai dasar jaringan?<span>+</span></div>
-          <div class="acc-body">Dengan praktik rutin, dasar jaringan dapat dikuasai dalam beberapa bulan.</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section id="contact" class="panel reveal">
-      <h2>Hubungi Kami</h2>
-      <p class="lead">Butuh bantuan jaringan atau konsultasi? Kirim pesan melalui form.</p>
-      <button class="btn btn-primary" id="openContactBtn2">Buka Form Kontak</button>
-    </section>
-
-  </main>
-
-  <!-- Footer -->
-  <footer class="site-footer">
-    <div class="container footer-grid">
-      <div>
-        <strong style="color:var(--accent)">TKJ</strong>
-        <div style="color:var(--muted); margin-top:6px">Sekolah Menengah Kejuruan — Teknik Komputer & Jaringan</div>
-      </div>
-
-      <div style="text-align:right">
-        <div class="socials">
-    <a href="https://instagram.com/USERNAME_KAMU" 
-       target="https://instagram.com/pure_logicc" 
-       aria-label="Instagram">IG</a>
-
-    <a href="https://wa.me/081298592349"
-       target="https://wa.me/+6281298592349" 
-       aria-label="WhatsApp">WA</a>
-
-    <a href="https://github.com/USERNAME_GITHUB"
-       target="_blank" 
-       aria-label="GitHub">GH</a>
-        </div>
-        <small style="display:block; margin-top:8px; color:var(--muted)">© <span id="year">2025</span> — Semua hak dilindungi</small>
-      </div>
-    </div>
-  </footer>
-
-  <!-- CONTACT MODAL (WEB3FORMS) -->
-  <div id="modal" class="modal" role="dialog" aria-modal="true" aria-hidden="true">
-    <div class="modal-card container" style="max-width:420px">
-      <div style="display:flex; justify-content:space-between; align-items:center">
-        <h3>Hubungi Kami</h3>
-        <button id="closeModal" style="background:transparent;border:0;color:var(--muted);font-size:20px;cursor:pointer">✕</button>
-      </div>
-
-      <form id="contactForm" action="https://api.web3forms.com/submit" method="POST" style="margin-top:10px">
-        <!-- Replace ACCESS_KEY_KAMU with your actual key from web3forms or other provider -->
-        <input type="hidden" name="access_key" value="ACCESS_KEY_KAMU">
-
-        <label>Nama</label>
-        <input type="text" name="name" required placeholder="Nama lengkap">
-
-        <label>Email</label>
-        <input type="email" name="email" required placeholder="email@contoh.com">
-
-        <label>Pesan</label>
-        <textarea name="message" rows="5" required placeholder="Tulis pesan..."></textarea>
-
-        <div style="margin-top:8px; display:flex; gap:8px">
-          <button type="submit" class="send-btn">Kirim</button>
-          <button type="button" id="cancel" class="btn btn-outline" style="background:transparent;color:var(--text)">Batal</button>
-        </div>
-
-        <p id="formMsg" style="color:var(--muted); margin-top:8px; font-size:14px"></p>
-      </form>
-    </div>
+<!-- kontrol musik (satu-satunya, biar tidak numpuk di layar HP) -->
+<div class="music-elegant" id="musicElegant">
+  <div class="disc" id="musicDisc">♪</div>
+  <div class="m-info">
+    <span class="m-title">musik latar</span>
+    <span class="m-sub" id="musicState">tap disc untuk main</span>
   </div>
+  <input type="range" class="m-vol" id="musicVol" min="0" max="1" step="0.01" value="0.6">
+</div>
 
-  <!-- LIGHTBOX (reused) -->
-  <div id="lightbox2" class="lightbox" aria-hidden="true"><img src="" alt="preview"></div>
+<div id="lightbox" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:2000;align-items:center;justify-content:center;">
+<img id="lightboxImg" style="max-width:90%;max-height:90%;border-radius:10px;">
+</div>
+
+
+<div class="float-decor" id="floatDecor"></div>
+<!-- ===== TAMBAHAN: kelopak sakura & mawar + bintang bergerak ===== -->
+<div class="petal-decor" id="petalDecor"></div>
+<canvas id="starField"></canvas>
+
+<div class="container">
+
+  <!-- HERO -->
+  <section class="hero">
+    <span class="hero-eyebrow">a little something for</span>
+    <h1>Meutia Agustina</h1>
+    <p class="sub">selamat ulang tahun, cantik.</p>
+    <div class="hero-divider"></div>
+    <div class="scroll-hint">
+      <span>gulir ke bawah</span>
+      <span>↓</span>
+    </div>
+  </section>
+
+  <!-- ENVELOPE -->
+  <section class="envelope-section" id="envSection">
+    <p class="env-label">ada surat kecil buat kamu…</p>
+    <div class="envelope" id="envelope">
+      <div class="env-body"></div>
+      <div class="env-flap"></div>
+      <div class="seal">♥</div>
+      <p class="env-hint">klik amplopnya ya</p>
+    </div>
+
+    <div class="letter-wrap" id="letterWrap">
+      <div class="letter">
+        <div class="letter-title">Untuk Kamu, Meutia</div>
+        <div class="letter-body" id="letterBody"></div>
+        <div class="letter-sign">— dari aku, yang sayang kamu</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="section">
+    <div class="section-head">
+      <span class="eyebrow"><sepo/span>
+      <h2>Foto Imut Mu</h2>
+    </div>
+    <div class="gallery" id="gallery"></div>
+  </section>
+
+  <!-- CALENDAR + GIFT + FLOWER -->
+  <section class="section">
+    <div class="row-cards">
+      <div class="card">
+        <div class="card-title">Hari Spesial</div>
+        <div class="cal-grid" id="calGrid"></div>
+        <p class="cal-note">hari ini, giliran kamu yang dirayakan 🎂</p>
+      </div>
+      <div class="card">
+        <div class="card-title">Sedikit Kejutan</div>
+        <div class="deco-row" style="margin-bottom:20px;">
+          <div class="gift-box"><div class="gift-lid"></div></div>
+          <div class="deco-text">satu kotak penuh doa & harapan baik, khusus buat kamu.</div>
+        </div>
+        <div class="deco-row">
+          <div class="flower-wrap">💐</div>
+          <div class="deco-text">seikat bunga virtual, karena kamu pantas dapat yang terindah.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TAMBAHAN: KUE ULANG TAHUN + TIUP LILIN ===== -->
+  <section class="cake-section reveal-up">
+    <div class="section-head">
+      <span class="eyebrow">satu permohonan sebelum kue dipotong</span>
+      <h2>Tiup Lilinnya, Yuk</h2>
+    </div>
+    <div class="cake-wrap">
+      <div class="cake-svg-wrap" id="cakeWrap">
+        <svg class="cake-body" viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="90" width="160" height="50" rx="6" fill="#6d1421"/>
+          <rect x="20" y="90" width="160" height="14" fill="#a4283a"/>
+          <rect x="30" y="55" width="140" height="40" rx="6" fill="#7a2732"/>
+          <rect x="30" y="55" width="140" height="12" fill="#a4283a"/>
+          <rect x="45" y="25" width="110" height="35" rx="6" fill="#8f2c39"/>
+          <rect x="45" y="25" width="110" height="10" fill="#c22c42"/>
+          <rect x="65" y="8" width="6" height="20" fill="#f4e8d8"/>
+          <rect x="98" y="4" width="6" height="24" fill="#f4e8d8"/>
+          <rect x="131" y="8" width="6" height="20" fill="#f4e8d8"/>
+        </svg>
+        <div class="candle-flame" id="flame1" style="left:32%; top:1.3%;"></div>
+        <div class="candle-flame" id="flame2" style="left:48.5%; top:-2.7%;"></div>
+        <div class="candle-flame" id="flame3" style="left:65%; top:1.3%;"></div>
+      </div>
+      <button class="blow-btn" id="blowBtn">tiup lilinnya 🎂</button>
+      <p class="cake-wish" id="cakeWish"></p>
+    </div>
+  </section>
+
+  <!-- ===== TAMBAHAN: VIRTUAL HUG ===== -->
+  <section class="hug-section reveal-up">
+    <div class="section-head">
+      <span class="eyebrow">jarak bukan penghalang</span>
+      <h2>Virtual Hug</h2>
+    </div>
+    <span class="hug-emoji" id="hugEmoji">🤗</span>
+    <button class="hug-btn" id="hugBtn">peluk aku</button>
+    <p class="hug-msg" id="hugMsg">pelukan hangat sampai ke kamu, di manapun kamu berada 🤍</p>
+  </section>
+
+  <!-- ===== TAMBAHAN: LOVE METER ===== -->
+  <section class="lovemeter-section reveal-up">
+    <p class="lovemeter-title">seberapa sayang aku ke kamu? tap / geser untuk cek</p>
+    <div class="lovemeter" id="loveMeter"><div class="lovemeter-fill" id="loveMeterFill"></div></div>
+    <p class="lovemeter-label" id="loveMeterLabel">— tap meterannya —</p>
+    <p class="lovemeter-hint">psst, jawabannya selalu 100%</p>
+  </section>
+
+  <!-- CLOSING -->
+  <section class="closing">
+    <h2>Happy Birthday<span class="name">, pretty girl.</span></h2>
+    <p class="tagline">enjoy your day, Babyy ✨</p>
+    <div class="heart-row">♡ ♥ ♡</div>
+
+    <!-- ===== TAMBAHAN: penutup dengan efek mengetik ===== -->
+    <div class="epilogue">
+      <p class="epilogue-text" id="epilogueText"></p>
+    </div>
+  </section>
+
+</div>
+
+<footer>made with love, just for Meutia</footer>
 
 <script>
-/* =========================
-   Utility & initial setup
-   ========================= */
-document.getElementById('year').textContent = new Date().getFullYear();
+/* ================= EDIT DI SINI ================= */
+// Isi pesan surat (boleh diedit bebas, gunakan \n untuk baris baru / paragraf baru)
+const LETTER_TEXT = `Hey,
+happy birthday yaa cantikkuu princesskuu sayangkuu MEUTIAAAA AGUSTINAAA, hari ini dunia beruntung banget karena seseorang yang paling manis dan paling berarti di hidup aku lahir di hari ini,
 
-/* Mobile nav (simple) */
-const hambtn = document.getElementById('hambtn');
-const navList = document.getElementById('navList');
-hambtn && hambtn.addEventListener('click', () => {
-  navList.style.display = navList.style.display === 'flex' ? 'none' : 'flex';
+semoga di umur yang sekarang semua hal baik selalu dateng ke kamu, semua impian dan cita cita kamu bisa tercapai satu satu, sehat selalu, panjang umur, makin cantik, makin kuat, dan tetep jadi diri kamu yang aku sayang banget ini,
+
+semoga aku masih jadi orang yang bisa nemenin kamu di ulang tahun berikutnya.
+
+Enjoy your day, pretty girl.`;
+
+// 15 0 — ganti "src" dengan nama file 0mu (taruh di folder yang sama dengan file HTML ini).
+// Kalau file belum ada / nama belum cocok, otomatis muncul kotak placeholder abu-abu.
+// Caption boleh diedit atau dikosongkan (caption: "").
+const PHOTOS = [
+  { src: "01.jpeg",  caption: "" },
+  { src: "02.jpeg",  caption: "" },
+  { src: "03.jpeg",  caption: "" },
+  { src: "04.jpeg",  caption: "" },
+  { src: "05.jpeg",  caption: "" },
+  { src: "06.jpeg",  caption: "" },
+  { src: "07.jpeg",  caption: "" },
+  { src: "08.jpeg",  caption: "" },
+  { src: "09.jpeg",  caption: "" },
+  { src: "010.jpeg", caption: "" },
+  { src: "011.jpeg", caption: "" },
+  { src: "012.jpeg", caption: "" },
+  { src: "013.jpeg", caption: "" },
+  { src: "014.jpeg", caption: "" },
+  { src: "015.jpeg", caption: "" },
+];
+
+// Tanggal ulang tahun di kalender — ganti angka & bulan sesuai tanggal ultahnya
+const BIRTHDAY_DAY = 2;
+const CAL_MONTH_LABEL = "Agustus 2026";
+const CAL_START_DOW = 6; // 0=Minggu,1=Senin,2=Selasa,3=Rabu,4=Kamis,5=Jumat,6=Sabtu — 1 Agustus 2026 jatuh hari Sabtu, jadi tgl 2 = Minggu
+const CAL_DAYS_IN_MONTH = 31;
+/* =================================================== */
+
+// letter text -> paragraphs
+document.getElementById('letterBody').innerHTML =
+  LETTER_TEXT.split('\n\n').map(p => `<p style="margin-bottom:14px">${p.replace(/\n/g,'<br>')}</p>`).join('');
+
+// envelope interaction
+const envelope = document.getElementById('envelope');
+const letterWrap = document.getElementById('letterWrap');
+let opened = false;
+envelope.addEventListener('click', () => {
+  if(opened) return;
+  opened = true;
+  envelope.classList.add('open');
+  setTimeout(() => {
+    letterWrap.classList.add('show');
+    setTimeout(() => letterWrap.scrollIntoView({behavior:'smooth', block:'center'}), 400);
+  }, 500);
 });
 
-/* Smooth reveal on scroll (IntersectionObserver) */
-const reveals = document.querySelectorAll('.reveal');
-const io = new IntersectionObserver((entries, obs) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.classList.add('show');
-      obs.unobserve(e.target);
-    }
+// gallery render
+const gallery = document.getElementById('gallery');
+gallery.innerHTML = PHOTOS.map((p, i) => `
+  <div class="polaroid">
+    <div class="tape"></div>
+    <div class="photo-frame">
+      <img src="${p.src}" alt="0 ${i+1}"
+        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <div class="photo-placeholder" style="display:none">
+        <span class="icon">📷</span>
+        <span>${p.src}</span>
+      </div>
+    </div>
+    ${p.caption ? `<div class="polaroid-cap">${p.caption}</div>` : ''}
+  </div>
+`).join('');
+
+// reveal-on-scroll for polaroids
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('in-view'); });
+}, { threshold:.15 });
+document.querySelectorAll('.polaroid').forEach(el => io.observe(el));
+
+// calendar render
+const dows = ['M','S','S','R','K','J','S'];
+let calHtml = dows.map(d => `<span class="dow">${d}</span>`).join('');
+for(let i=0;i<CAL_START_DOW;i++) calHtml += `<span></span>`;
+for(let d=1; d<=CAL_DAYS_IN_MONTH; d++){
+  calHtml += `<span class="${d===BIRTHDAY_DAY?'today':''}">${d}</span>`;
+}
+document.getElementById('calGrid').innerHTML = calHtml;
+document.querySelector('.card-title').textContent = `Hari Spesial — ${BIRTHDAY_DAY} ${CAL_MONTH_LABEL}`;
+
+// floating hearts + sparkles background
+const decor = document.getElementById('floatDecor');
+const heartsChars = ['♥','♡'];
+for(let i=0;i<16;i++){
+  const el = document.createElement('span');
+  el.className = 'heart-p';
+  el.textContent = heartsChars[Math.floor(Math.random()*heartsChars.length)];
+  el.style.left = Math.random()*100 + 'vw';
+  el.style.fontSize = (12 + Math.random()*16) + 'px';
+  el.style.animationDuration = (10 + Math.random()*14) + 's';
+  el.style.animationDelay = (Math.random()*10) + 's';
+  decor.appendChild(el);
+}
+for(let i=0;i<10;i++){
+  const el = document.createElement('span');
+  el.className = 'sparkle';
+  el.textContent = '✦';
+  el.style.left = Math.random()*100 + 'vw';
+  el.style.top = Math.random()*100 + 'vh';
+  el.style.fontSize = (10 + Math.random()*10) + 'px';
+  el.style.animationDelay = (Math.random()*3) + 's';
+  decor.appendChild(el);
+}
+
+// Added enhancements
+const music=document.getElementById('bgMusic');
+window.addEventListener("load", () => {
+    music.volume = 0.6;
+
+    const playMusic = () => {
+        music.play().catch(() => {});
+    };
+
+    playMusic();
+
+    document.addEventListener("click", playMusic, { once: true });
+    document.addEventListener("touchstart", playMusic, { once: true });
+});
+document.addEventListener('click',e=>{
+ if(e.target.matches('.photo-frame img')){
+   const lb=document.getElementById('lightbox');
+   document.getElementById('lightboxImg').src=e.target.src;
+   lb.style.display='flex';
+ }
+});
+document.getElementById('lightbox').onclick=()=>lightbox.style.display='none';
+
+function confettiBurst(){
+ for(let i=0;i<80;i++){
+  const s=document.createElement('span');
+  s.textContent=['🎉','✨','💖','🎊'][Math.floor(Math.random()*4)];
+  s.style.position='fixed';
+  s.style.left=Math.random()*100+'vw';
+  s.style.top='-20px';
+  s.style.fontSize=(16+Math.random()*18)+'px';
+  s.style.zIndex=3000;
+  s.style.transition='transform 3s linear,opacity 3s';
+  document.body.appendChild(s);
+  requestAnimationFrame(()=>{
+    s.style.transform=`translateY(${window.innerHeight+50}px) rotate(${Math.random()*720}deg)`;
+    s.style.opacity='0';
   });
-}, {threshold: 0.12});
-reveals.forEach(r => io.observe(r));
+  setTimeout(()=>s.remove(),3000);
+ }
+}
+envelope.addEventListener('click',()=>setTimeout(confettiBurst,700),{once:true});
 
-/* Navbar active state on scroll */
-const navLinks = document.querySelectorAll('.nav-link');
-const sections = Array.from(navLinks).map(a => document.querySelector(a.getAttribute('href')));
-window.addEventListener('scroll', () => {
-  const y = window.scrollY + (window.innerHeight/5);
-  sections.forEach((sec, idx) => {
-    if (!sec) return;
-    if (y >= sec.offsetTop && y < sec.offsetTop + sec.offsetHeight) {
-      navLinks.forEach(l => l.classList.remove('active'));
-      navLinks[idx].classList.add('active');
-    }
-  });
+/* =====================================================================
+   ===================  TAMBAHAN BARU (JavaScript)  ===================
+   Semua kode di atas ini TIDAK diubah sedikit pun.
+===================================================================== */
 
-  // change header style when scrolled
-  if (window.scrollY > 40) document.querySelector('.site-header').style.boxShadow = '0 6px 18px rgba(0,0,0,0.5)';
-  else document.querySelector('.site-header').style.boxShadow = 'none';
+/* ---------- 15. Loading screen elegan ---------- */
+window.addEventListener('load', () => {
+  setTimeout(() => document.getElementById('loadingScreen').classList.add('hide'), 550);
 });
+// jaga-jaga kalau event 'load' lambat / gagal, tetap hilang otomatis
+setTimeout(() => document.getElementById('loadingScreen').classList.add('hide'), 3500);
 
-/* Lightbox for projects */
-const projects = document.querySelectorAll('.project');
-const lightbox = document.getElementById('lightbox');
-const lbImage = document.getElementById('lbImage');
+/* ---------- 1. Kelopak sakura & mawar jatuh ---------- */
+(function petals(){
+  const wrap = document.getElementById('petalDecor');
+  const kinds = ['🌸','🌸','🌸','🌹','🌺'];
+  const total = window.innerWidth < 600 ? 14 : 24;
+  for(let i=0;i<total;i++){
+    const p = document.createElement('span');
+    p.className = 'petal';
+    p.textContent = kinds[Math.floor(Math.random()*kinds.length)];
+    p.style.left = (Math.random()*100) + 'vw';
+    p.style.fontSize = (14 + Math.random()*14) + 'px';
+    p.style.setProperty('--drift', (Math.random()*160 - 80) + 'px');
+    p.style.animationDuration = (11 + Math.random()*12) + 's';
+    p.style.animationDelay = (Math.random()*14) + 's';
+    wrap.appendChild(p);
+  }
+})();
 
-projects.forEach(p => {
-  p.addEventListener('click', () => {
-    const src = p.getAttribute('data-src') || p.querySelector('img').src;
-    lbImage.src = src;
-    document.getElementById('lightbox').classList.add('active');
-    document.getElementById('lightbox').setAttribute('aria-hidden', 'false');
-  });
-});
-document.getElementById('lightbox')?.addEventListener('click', (e)=> {
-  if (e.target === lbImage) return;
-  document.getElementById('lightbox').classList.remove('active');
-  document.getElementById('lightbox').setAttribute('aria-hidden', 'true');
-});
+/* ---------- 2. Background bintang bergerak ---------- */
+(function starField(){
+  const canvas = document.getElementById('starField');
+  const ctx = canvas.getContext('2d');
+  let w, h, stars = [];
+  function resize(){
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = window.innerHeight;
+  }
+  function initStars(){
+    const count = Math.floor((w*h)/9000);
+    stars = Array.from({length:count}, () => ({
+      x: Math.random()*w,
+      y: Math.random()*h,
+      r: Math.random()*1.3 + .3,
+      speed: Math.random()*.15 + .02,
+      twinkleSpeed: Math.random()*.02 + .008,
+      phase: Math.random()*Math.PI*2
+    }));
+  }
+  window.addEventListener('resize', () => { resize(); initStars(); });
+  resize(); initStars();
+  function tick(t){
+    ctx.clearRect(0,0,w,h);
+    stars.forEach(s => {
+      s.y += s.speed;
+      if(s.y > h) s.y = 0;
+      const tw = Math.sin(t*s.twinkleSpeed + s.phase)*.4 + .6;
+      ctx.beginPath();
+      ctx.fillStyle = `rgba(244,232,216,${tw*0.8})`;
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
+      ctx.fill();
+    });
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+})();
 
-/* Secondary lightbox (for gallery if needed) */
-const lb2 = document.getElementById('lightbox2');
-lb2 && lb2.addEventListener('click', ()=> lb2.classList.remove('active'));
+/* ---------- 3. Kontrol musik elegan (tetap sinkron dengan tombol lama) ---------- */
+(function elegantMusic(){
+  const panel = document.getElementById('musicElegant');
+  const disc = document.getElementById('musicDisc');
+  const state = document.getElementById('musicState');
+  const vol = document.getElementById('musicVol');
+  music.volume = parseFloat(vol.value);
 
-/* Topology animation: simple periodic class toggle (simulates "ping") */
-const links = document.querySelectorAll('.link::after'); // note: pseudo element can't be selected via JS
-// Instead, create a small live dot on links dynamically for better control
-document.querySelectorAll('.link').forEach(lk => {
-  const dot = document.createElement('div');
-  dot.style.position = 'absolute';
-  dot.style.left = '-18%';
-  dot.style.top = '0';
-  dot.style.width='24%';
-  dot.style.height='100%';
-  dot.style.background='linear-gradient(90deg, rgba(0,255,255,0.6), rgba(255,255,255,0))';
-  dot.style.borderRadius='6px';
-  dot.style.transition='left 1.6s linear';
-  lk.appendChild(dot);
-  setInterval(()=> {
-    dot.style.left = '-40%';
-    requestAnimationFrame(()=> dot.style.left = '120%');
-  }, 1600 + Math.random()*800);
-});
+  setTimeout(() => panel.classList.add('show'), 300);
 
-/* Accordion (FAQ) */
-document.querySelectorAll('.acc-item .acc-head').forEach(h=>{
-  h.addEventListener('click', ()=> {
-    const body = h.nextElementSibling;
-    const open = body.style.display === 'block';
-    document.querySelectorAll('.acc-item .acc-body').forEach(b=> b.style.display = 'none');
-    if (!open) body.style.display = 'block';
-  });
-});
-
-/* Certificates track duplication fix (pause on hover) */
-const certTrack = document.getElementById('certTrack');
-certTrack && certTrack.addEventListener('mouseenter', ()=> certTrack.style.animationPlayState='paused');
-certTrack && certTrack.addEventListener('mouseleave', ()=> certTrack.style.animationPlayState='running');
-
-/* Contact modal controls (two open buttons) */
-const modal = document.getElementById('modal');
-const openContact = document.querySelectorAll('#openContactBtn, #openContactBtn2, #openContactBtn');
-openContact.forEach(b => b && b.addEventListener('click', ()=> {
-  modal.classList.add('open'); modal.setAttribute('aria-hidden','false');
-}));
-document.getElementById('closeModal').addEventListener('click', ()=> { modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); });
-document.getElementById('cancel').addEventListener('click', ()=> { modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); });
-window.addEventListener('click', (e)=> { if (e.target === modal) { modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); } });
-
-/* Contact form submit (using web3forms) with client-side feedback */
-document.getElementById('contactForm')?.addEventListener('submit', async (e)=>{
-  e.preventDefault();
-  const form = e.target;
-  const msg = document.getElementById('formMsg');
-  msg.textContent = 'Mengirim...';
-  const data = new FormData(form);
-  try {
-    const res = await fetch(form.action, { method:'POST', body:data });
-    const json = await res.json();
-    if (json.success) {
-      msg.textContent = 'Pesan terkirim. Terima kasih!';
-      form.reset();
-      setTimeout(()=>{ modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); msg.textContent=''; }, 1800);
+  function syncUI(){
+    if(music.paused){
+      panel.classList.remove('playing');
+      state.textContent = 'tap disc untuk main';
     } else {
-      msg.textContent = 'Terjadi masalah. Coba lagi.';
+      panel.classList.add('playing');
+      state.textContent = 'sedang diputar ♪';
     }
-  } catch (err) {
-    msg.textContent = 'Gagal mengirim — periksa koneksi.';
   }
-});
+  disc.addEventListener('click', () => {
+    music.paused ? music.play().catch(()=>{}) : music.pause();
+    syncUI();
+  });
+  vol.addEventListener('input', () => { music.volume = parseFloat(vol.value); });
+  music.addEventListener('play', syncUI);
+  music.addEventListener('pause', syncUI);
+})();
 
-/* Dark/Light mode toggle (simple) */
-const modeToggle = document.getElementById('modeToggle');
-modeToggle.addEventListener('click', ()=> {
-  const root = document.documentElement;
-  if (root.style.getPropertyValue('--bg') === '#ffffff') {
-    // currently light -> set dark
-    root.style.setProperty('--bg','#0b0f16');
-    root.style.setProperty('--card','#0f1720');
-    modeToggle.textContent = '🌗';
-  } else {
-    // switch to light-ish theme
-    root.style.setProperty('--bg','#f7fbff');
-    root.style.setProperty('--card','#ffffff');
-    root.style.setProperty('--text','#07122a');
-    root.style.setProperty('--muted','#4b5563');
-    root.style.setProperty('--accent','#0ea5e9');
-    root.style.setProperty('--accent-2','#60a5fa');
-    modeToggle.textContent = '🌞';
-  }
-});
+/* ---------- 4. Efek mengetik untuk surat ---------- */
+(function letterTypewriter(){
+  const target = document.getElementById('letterBody');
+  const paragraphs = LETTER_TEXT.split('\n\n');
+  let typed = false;
 
-/* Accessibility: close modal with Esc */
-document.addEventListener('keydown',(e)=> {
-  if (e.key === 'Escape') {
-    modal.classList.remove('open');
-    document.getElementById('lightbox')?.classList.remove('active');
+  function typeParagraphs(){
+    if(typed) return;
+    typed = true;
+    target.innerHTML = '';
+    let pIndex = 0;
+    function nextParagraph(){
+      if(pIndex >= paragraphs.length) return;
+      const p = document.createElement('p');
+      p.style.marginBottom = '14px';
+      target.appendChild(p);
+      const text = paragraphs[pIndex].replace(/\n/g, '<br>');
+      const plain = paragraphs[pIndex];
+      let i = 0;
+      const cursor = document.createElement('span');
+      cursor.className = 'typing-cursor';
+      function typeChar(){
+        if(i <= plain.length){
+          p.innerHTML = plain.slice(0, i).replace(/\n/g,'<br>');
+          p.appendChild(cursor);
+          i++;
+          setTimeout(typeChar, 16 + Math.random()*14);
+        } else {
+          cursor.remove();
+          pIndex++;
+          setTimeout(nextParagraph, 260);
+        }
+      }
+      typeChar();
+    }
+    nextParagraph();
   }
-});
+  // dipicu saat amplop dibuka (menambah listener baru, tidak mengganti listener lama)
+  envelope.addEventListener('click', () => setTimeout(typeParagraphs, 550), {once:true});
+})();
+
+/* ---------- 5. Galeri fullscreen + Next/Previous ---------- */
+(function galleryFullscreen(){
+  const lb = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lightboxImg');
+  let currentIndex = 0;
+
+  // tombol navigasi & counter ditambahkan lewat JS, tidak mengubah HTML lightbox aslinya
+  const prevBtn = document.createElement('div');
+  prevBtn.className = 'lb-nav lb-prev'; prevBtn.textContent = '‹';
+  const nextBtn = document.createElement('div');
+  nextBtn.className = 'lb-nav lb-next'; nextBtn.textContent = '›';
+  const closeBtn = document.createElement('div');
+  closeBtn.className = 'lb-close'; closeBtn.textContent = '✕';
+  const counter = document.createElement('div');
+  counter.className = 'lb-counter';
+  const caption = document.createElement('div');
+  caption.className = 'lb-cap';
+  lb.appendChild(prevBtn); lb.appendChild(nextBtn); lb.appendChild(closeBtn);
+  lb.appendChild(counter); lb.appendChild(caption);
+
+  function openAt(i){
+    if(i < 0) i = PHOTOS.length - 1;
+    if(i >= PHOTOS.length) i = 0;
+    currentIndex = i;
+    lbImg.src = PHOTOS[currentIndex].src;
+    counter.textContent = (currentIndex+1) + ' / ' + PHOTOS.length;
+    caption.textContent = PHOTOS[currentIndex].caption || '';
+    lb.style.display = 'flex';
+  }
+  // klik 0 di galeri: buka fullscreen di index yang sesuai (tambahan listener, listener lama tetap ada)
+  document.getElementById('gallery').addEventListener('click', (e) => {
+    const img = e.target.closest('.photo-frame img');
+    if(!img) return;
+    const card = img.closest('.polaroid');
+    const idx = Array.from(document.querySelectorAll('.polaroid')).indexOf(card);
+    openAt(idx);
+  });
+  prevBtn.addEventListener('click', (e) => { e.stopPropagation(); openAt(currentIndex-1); });
+  nextBtn.addEventListener('click', (e) => { e.stopPropagation(); openAt(currentIndex+1); });
+  closeBtn.addEventListener('click', (e) => { e.stopPropagation(); lb.style.display = 'none'; });
+  document.addEventListener('keydown', (e) => {
+    if(lb.style.display !== 'flex') return;
+    if(e.key === 'ArrowRight') openAt(currentIndex+1);
+    if(e.key === 'ArrowLeft') openAt(currentIndex-1);
+    if(e.key === 'Escape') lb.style.display = 'none';
+  });
+})();
+
+/* ---------- 6. Confetti premium (pita + kilau, dipakai di momen-momen spesial) ---------- */
+function confettiPremium(duration = 2600){
+  const colors = ['#a4283a','#cda869','#e7b8b4','#f4e8d8','#6d1421'];
+  const count = 60;
+  for(let i=0;i<count;i++){
+    const el = document.createElement('div');
+    el.className = 'confetti-ribbon';
+    const isRibbon = Math.random() > .4;
+    el.style.width = isRibbon ? (4+Math.random()*3)+'px' : (7+Math.random()*5)+'px';
+    el.style.height = isRibbon ? (12+Math.random()*10)+'px' : el.style.width;
+    el.style.background = colors[Math.floor(Math.random()*colors.length)];
+    el.style.left = Math.random()*100+'vw';
+    el.style.opacity = .95;
+    el.style.transition = `transform ${duration/1000}s cubic-bezier(.15,.6,.4,1), opacity ${duration/1000}s ease`;
+    document.body.appendChild(el);
+    requestAnimationFrame(() => {
+      const drift = (Math.random()*200-100);
+      el.style.transform = `translate(${drift}px, ${window.innerHeight+60}px) rotate(${Math.random()*900-450}deg)`;
+      el.style.opacity = '0';
+    });
+    setTimeout(() => el.remove(), duration+200);
+  }
+}
+
+/* ---------- 7. Kotak hadiah interaktif ---------- */
+(function interactiveGift(){
+  const box = document.querySelector('.gift-box');
+  if(!box) return;
+  const note = document.createElement('p');
+  note.className = 'gift-note';
+  note.textContent = 'isinya: doa terbaik, semangat, dan sepenuh sayang buat kamu hari ini 🤍, Ditunggu Kadonya Yaaaaa';
+  box.parentElement.appendChild(note);
+  box.addEventListener('click', () => {
+    const opened = box.classList.toggle('opened');
+    note.classList.toggle('show', opened);
+    if(opened) confettiPremium(1800);
+  });
+})();
+
+/* ---------- 8. Kue ulang tahun + tiup lilin ---------- */
+(function birthdayCake(){
+  const btn = document.getElementById('blowBtn');
+  const wish = document.getElementById('cakeWish');
+  const flames = ['flame1','flame2','flame3'].map(id => document.getElementById(id));
+  const wishes = [
+    'permohonanmu sudah dikirim ke semesta ✨',
+    'semoga semua yang kamu bisikkan barusan jadi nyata 🎂',
+    'lilin padam, harapan menyala 🤍'
+  ];
+  btn.addEventListener('click', () => {
+    btn.disabled = true;
+    let i = 0;
+    const timer = setInterval(() => {
+      if(i < flames.length){ flames[i].classList.add('blown'); i++; }
+      else{
+        clearInterval(timer);
+        wish.textContent = wishes[Math.floor(Math.random()*wishes.length)];
+        confettiPremium(2200);
+      }
+    }, 380);
+  });
+})();
+
+/* ---------- 9. Virtual hug ---------- */
+(function virtualHug(){
+  const btn = document.getElementById('hugBtn');
+  const emoji = document.getElementById('hugEmoji');
+  const msg = document.getElementById('hugMsg');
+  btn.addEventListener('click', () => {
+    emoji.classList.remove('hugging'); void emoji.offsetWidth; emoji.classList.add('hugging');
+    msg.classList.add('show');
+    if(navigator.vibrate) navigator.vibrate([40,60,40]);
+  });
+})();
+
+/* ---------- 10. Epilog "I Love You, Yesterday, Today, Tomorrow, Forever" ---------- */
+(function epilogueTyping(){
+  const el = document.getElementById('epilogueText');
+  const text = 'I Love You, Yesterday, Today, Tomorrow, Forever.';
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        io.disconnect();
+        let i = 0;
+        const cursor = document.createElement('span');
+        cursor.className = 'typing-cursor';
+        function type(){
+          if(i <= text.length){
+            el.textContent = text.slice(0, i);
+            el.appendChild(cursor);
+            i++;
+            setTimeout(type, 55);
+          } else {
+            cursor.remove();
+          }
+        }
+        type();
+      }
+    });
+  }, {threshold:.5});
+  io.observe(el);
+})();
+
+/* ---------- 12. Love meter ---------- */
+(function loveMeter(){
+  const meter = document.getElementById('loveMeter');
+  const fill = document.getElementById('loveMeterFill');
+  const label = document.getElementById('loveMeterLabel');
+  let filled = false;
+  meter.addEventListener('click', () => {
+    fill.style.width = '100%';
+    label.textContent = '100% — selalu, tanpa henti 🤍';
+    if(!filled){ filled = true; confettiPremium(1600); }
+  });
+})();
+
+/* ---------- 13. Reveal animasi smooth untuk section baru ---------- */
+(function revealSections(){
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('in-view'); });
+  }, {threshold:.15});
+  document.querySelectorAll('.reveal-up').forEach(el => io.observe(el));
+})();
+
+/* ---------- Cursor mengeluarkan hati ---------- */
+(function cursorHearts(){
+  const chars = ['♥','❤','💕'];
+  let last = 0;
+  function spawn(x, y){
+    const el = document.createElement('span');
+    el.className = 'cursor-heart';
+    el.textContent = chars[Math.floor(Math.random()*chars.length)];
+    el.style.left = x + 'px';
+    el.style.top = y + 'px';
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 1000);
+  }
+  window.addEventListener('mousemove', (e) => {
+    const now = Date.now();
+    if(now - last < 90) return;
+    last = now;
+    spawn(e.clientX, e.clientY);
+  });
+  window.addEventListener('touchmove', (e) => {
+    const t = e.touches[0];
+    if(!t) return;
+    const now = Date.now();
+    if(now - last < 140) return;
+    last = now;
+    spawn(t.clientX, t.clientY);
+  }, {passive:true});
+})();
+
 </script>
-
 </body>
 </html>
